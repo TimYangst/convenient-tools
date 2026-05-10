@@ -11,6 +11,9 @@ dependencies = []
 
 [project.scripts]
 convenient-tools = "convenient_tools:main"
+gac = "convenient_tools.gac:main"
+grb = "convenient_tools.grb:main"
+gpo = "convenient_tools.gpo:main"
 
 [build-system]
 requires = ["uv_build>=0.9.8,<0.10.0"]
