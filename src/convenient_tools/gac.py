@@ -1,4 +1,5 @@
 """gac: git add -A && git commit (forwards extra args, e.g. -m "msg")."""
+
 import subprocess
 import sys
 

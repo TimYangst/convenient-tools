@@ -1,8 +1,10 @@
 [project]
 name = "convenient-tools"
 version = "0.1.0"
-description = "Add your description here"
+description = "Personal CLI utilities and reusable AI-agent skills, maintained in one repo."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     { name = "TimYangst", email = "yt0701@gmail.com" }
 ]
@@ -18,3 +20,37 @@ gpo = "convenient_tools.gpo:main"
 [build-system]
 requires = ["uv_build>=0.9.8,<0.10.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.0",
+    "ruff>=0.15",
+]
+
+# --- Lint & format ---------------------------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle
+  "F",        # pyflakes
+  "I",        # isort
+  "UP",       # pyupgrade
+  "B",        # flake8-bugbear
+  "SIM",      # flake8-simplify
+  "RUF",      # ruff-specific
+]
+ignore = [
+  "E501",  # line length — formatter handles it
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

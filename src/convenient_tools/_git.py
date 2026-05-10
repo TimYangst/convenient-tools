@@ -1,4 +1,5 @@
 """Shared git helpers for convenient_tools."""
+
 import subprocess
 import sys
 
@@ -16,9 +17,7 @@ def current_branch() -> str:
 
 
 def is_dirty() -> bool:
-    r = subprocess.run(
-        ["git", "status", "--porcelain"], capture_output=True, text=True
-    )
+    r = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
     if r.returncode != 0:
         sys.stderr.write(r.stderr)
         sys.exit(r.returncode)
@@ -27,9 +26,7 @@ def is_dirty() -> bool:
 
 def require_clean() -> None:
     if is_dirty():
-        sys.stderr.write(
-            "error: working tree has uncommitted changes; commit or stash first.\n"
-        )
+        sys.stderr.write("error: working tree has uncommitted changes; commit or stash first.\n")
         sys.exit(1)
 
 

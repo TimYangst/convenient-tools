@@ -1,3 +1,18 @@
+# --- Secrets / local config (never commit) ---
+.env
+.env.*
+!.env.example
+.secrets
+.secrets.*
+*.key
+*.pem
+credentials.json
+
+# --- Claude Code / agent local state ---
+# Per-project Claude scratch (worktrees, drafts). Keep .agents/ tracked — it's
+# the canonical source for shared skills.
+.claude/
+
 # Python
 __pycache__/
 *.py[cod]

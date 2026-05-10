@@ -23,7 +23,7 @@ The skill arg, if any, is the inactivity threshold. Normalize it to a git-compat
 
 2. **Identify protected names.** Always exclude:
    - `main`, `master`, `develop` (and the current `HEAD` branch — git refuses to delete it anyway)
-   - Anything the user has listed as protected in this repo's `CLAUDE.md` or `.claude/skills/clean-git-branches/protected.txt` if present
+   - Anything the user has listed as protected in this repo's `CLAUDE.md` or `.agents/skills/clean-git-branches/protected.txt` if present
 
 3. **Collect candidates.** Run:
    ```bash

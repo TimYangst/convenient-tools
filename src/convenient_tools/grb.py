@@ -1,4 +1,5 @@
 """grb: rebase the current branch on top of an updated base branch (default main)."""
+
 import argparse
 import sys
 

@@ -7,6 +7,17 @@ A personal toolbox, maintained in one repo:
 
 The CLI and skills halves are independent — you can use either without setting up the other.
 
+## Development
+
+Once after cloning, if you want to hack on the code:
+
+```bash
+uv sync                       # install runtime + dev deps from the lockfile
+uv run pre-commit install     # activate the local git hook (ruff lint + format)
+```
+
+CI (`.github/workflows/ci.yml`) runs the same `pre-commit` hooks on every PR and push to `main`, so local hooks and CI cannot disagree.
+
 ## CLI tools
 
 ### Install (editable, for development)
