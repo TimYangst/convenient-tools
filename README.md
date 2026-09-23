@@ -7,6 +7,8 @@ A personal toolbox, maintained in one repo:
 
 The CLI and skills halves are independent — you can use either without setting up the other.
 
+> **Keep the clone where it is.** Both halves point back into this checkout: the CLI is an editable install and the skills are symlinks. Moving or deleting the repo breaks them — reinstall from the new location if you move it.
+
 ## Development
 
 Once after cloning, if you want to hack on the code:
@@ -33,12 +35,22 @@ uv run convenient-tools          # runs the placeholder entry point
 uv tool install --editable .
 ```
 
-After that every script declared in `[project.scripts]` is on your `PATH` (uv drops them in `~/.local/bin`). On zsh/bash that directory is already wired up by `~/.local/bin/env`, which `uv` adds to your shell rc the first time it's used — no further config needed.
+After that every script declared in `[project.scripts]` is on your `PATH` (uv drops them in `~/.local/bin`), usable from any directory regardless of which virtualenv is active — each tool runs in its own isolated uv-managed environment. If your shell can't find them, `~/.local/bin` isn't on your `PATH` yet; fix that with:
 
-To pick up later changes, re-run with `--force`:
+```bash
+uv tool update-shell             # adds ~/.local/bin to your shell rc; restart the shell after
+```
+
+Because the install is editable, edits to existing tools take effect immediately. Only when you add or rename an entry in `[project.scripts]` do you need to reinstall:
 
 ```bash
 uv tool install --editable . --force
+```
+
+To uninstall:
+
+```bash
+uv tool uninstall convenient-tools
 ```
 
 ### Available tools
@@ -89,7 +101,7 @@ Refuses to run if the working tree has uncommitted changes.
    foo = "convenient_tools.foo:main"
    ```
 
-3. Re-run `uv tool install --editable . --force` (or `uv sync` for dev use) to pick up the new entry point.
+3. Re-run `uv tool install --editable . --force` (or `uv sync` for dev use) to pick up the new entry point. Later edits to the module need no reinstall.
 
 ## Agent skills
 
@@ -101,7 +113,13 @@ Reusable workflow skills for AI coding agents (Claude Code, Codex, …), followi
 bash .agents/setup_agent.sh claude   # symlinks each skill into ~/.claude/skills/
 ```
 
-Re-run after adding a skill — the script is idempotent.
+Re-run after adding a skill — the script is idempotent. Edits to an existing skill take effect immediately through the symlink.
+
+To uninstall a skill, remove its symlink (the source in this repo is untouched):
+
+```bash
+rm ~/.claude/skills/<skill-name>
+```
 
 ### Available skills
 
